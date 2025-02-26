@@ -18,6 +18,28 @@ if (isset($_SESSION['username'])) {
     <nav class="nav flex-column">
         <a href="index" class="nav-link text-white">Dashboard</a>
 
+                <!-- Manage Officials Menu with Submenu -->
+                <div class="nav-item">
+            <a 
+                class="nav-link text-white dropdown-toggle" 
+                data-bs-toggle="collapse" 
+                href="#accountVisitorSubmenu" 
+                role="button" 
+                aria-expanded="false" 
+                aria-controls="accountVisitorSubmenu">
+                Manage Officials
+            </a>
+            <div class="collapse" id="accountVisitorSubmenu">
+                <nav class="nav flex-column ms-3">
+                <a href="#" class="nav-link text-white" id="addVisitorBtn">Add</a>
+                    <a href="view-visitor.php" class="nav-link text-white">Edit</a>
+                    <a href="official-duties.php" class="nav-link text-white">Duties</a>
+                    <a href="#" class="nav-link text-white">Attendance</a>
+
+                </nav>
+            </div>
+        </div>
+
         <!-- Account Menu with Submenu -->
         <div class="nav-item">
             <a 
@@ -37,26 +59,10 @@ if (isset($_SESSION['username'])) {
             </div>
         </div>
 
-        <!-- Manage Visitor Menu with Submenu -->
-        <div class="nav-item">
-            <a 
-                class="nav-link text-white dropdown-toggle" 
-                data-bs-toggle="collapse" 
-                href="#accountVisitorSubmenu" 
-                role="button" 
-                aria-expanded="false" 
-                aria-controls="accountVisitorSubmenu">
-                Manage Visitor
-            </a>
-            <div class="collapse" id="accountVisitorSubmenu">
-                <nav class="nav flex-column ms-3">
-                <a href="#" class="nav-link text-white" id="addVisitorBtn">Add Visitor</a>
-                    <a href="view-visitor.php" class="nav-link text-white">Edit Visitor</a>
-                </nav>
-            </div>
-        </div>
 
+        
         <a href="monitor-visitor.php" class="nav-link text-white">Monitor</a>
+
         <a href="report.php" class="nav-link text-white">Reports</a>
 
         <hr>

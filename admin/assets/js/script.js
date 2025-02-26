@@ -77,6 +77,36 @@
         });
     });
     
+    // Pop up modal for edit official account
+    document.addEventListener("DOMContentLoaded", () => {
+        const editButtons = document.querySelectorAll(".btn-primary[data-bs-target='#editModal']");
+    
+        editButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const id = button.getAttribute("data-id");
+                const type = button.getAttribute("data-type");
+                const firstName = button.getAttribute("data-firstname");
+                const middleName = button.getAttribute("data-middlename");
+                const lastName = button.getAttribute("data-lastname");
+                const email = button.getAttribute("data-email");
+                const sex = button.getAttribute("data-sex");
+                const age = button.getAttribute("data-age");
+    
+                // Populate the form
+                document.getElementById("edit-id").value = id;
+                document.getElementById("edit-type").value = type;
+                document.getElementById("edit-firstname").value = firstName;
+                document.getElementById("edit-middlename").value = middleName;
+                document.getElementById("edit-lastname").value = lastName;
+                document.getElementById("edit-email").value = email;
+                document.getElementById("edit-sex").value = sex;
+                document.getElementById("edit-age").value = age;
+            });
+        });
+    });
+    
+
+
     //fetch visitors data by search
     document.addEventListener("DOMContentLoaded", () => {
         const searchInput = document.getElementById("search-input");
@@ -86,6 +116,27 @@
             searchInput.addEventListener("input", (event) => {
                 const query = event.target.value;
                 fetch(`fetch-visitors.php?search=${encodeURIComponent(query)}`)
+                    .then((response) => {
+                        if (!response.ok) throw new Error("Network response was not ok");
+                        return response.text();
+                    })
+                    .then((data) => {
+                        visitorTable.innerHTML = data; 
+                    })
+                    .catch((error) => console.error("Error fetching data:", error));
+            });
+        }
+    });
+
+    //fetch officials data by search
+    document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("search-officials-input");
+        const visitorTable = document.getElementById("officials-table");
+
+        if (searchInput) {
+            searchInput.addEventListener("input", (event) => {
+                const query = event.target.value;
+                fetch(`fetch-official-duties.php?search=${encodeURIComponent(query)}`)
                     .then((response) => {
                         if (!response.ok) throw new Error("Network response was not ok");
                         return response.text();

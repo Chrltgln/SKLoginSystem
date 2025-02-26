@@ -103,9 +103,6 @@ if (isset($_POST['timeIn'])) {
         $_SESSION['message_type'] = 'danger';
     }
 } elseif (isset($_POST['timeOut'])) {
-    // Debugging: Log or display $_POST data
-    error_log(print_r($_POST, true)); // Logs to your server's error log
-
     if (!$code) {
         $_SESSION['message'] = "Code is required.";
         $_SESSION['message_type'] = 'danger';

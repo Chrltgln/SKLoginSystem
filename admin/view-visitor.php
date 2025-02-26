@@ -7,39 +7,12 @@ include 'fetch-added-visitor.php';
     <div class="d-flex">
         <!-- Sidebar -->
         <?php include 'includes/sidebar.php';
-        include 'edit-account-modal.php' ?>
+        include 'edit-official-modal.php' ?>
 
         <!-- Main Content -->
         <div class="flex-grow-1 p-4">
             <div class="container mt-4">
-                <!-- <div class="row text-center">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">ADMIN</h5>
-                                <p class="card-text"><?php echo $totalAdmin; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">STAFF</h5>
-                                <p class="card-text" id="current-visitors"><?php echo $totalStaff; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">TOTAL ACCOUNTS</h5>
-                                <p class="card-text" id="current-visitors"><?php echo $totalAll; ?></p>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
 
-                <!-- Validation message for adding an account -->
                 <?php if (isset($_SESSION['message'])): ?>
                     <div class="alert-container">
                         <div class="alert alert-<?php echo $_SESSION['message_type']; ?> alert-dismissible fade show"
@@ -61,42 +34,56 @@ include 'fetch-added-visitor.php';
                             value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                     </div>
                     <table class="table table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Name</th>
-                            <th>Sex</th>
-                            <th>Age</th>
-                            <th>Static Code</th>
-                            <th>type</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="account-table">
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <thead class="table-dark">
                             <tr>
-                                <td>
-                                    <?php echo $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name']; ?>
-                                </td>
-                                <td><?php echo $row['sex_name']; ?></td>
-                                <td><?php echo $row['age']; ?></td>
-                                <td><?php echo $row['static_code']; ?></td>
-                                <td><?php echo $row['type'];?></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary" data-id="<?php echo $row['id']; ?>" 
-                                            data-bs-toggle="modal" data-bs-target="#editModal">
-                                        EDIT
-                                    </button>
-                                    <form action="delete-visitor.php" method="POST" class="d-inline delete-form">
-                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                        <button type="submit" class="btn btn-sm btn-danger delete-button">
-                                            DELETE
-                                        </button>
-                                    </form>
-                                </td>
+                                <th>Name</th>
+                                <th>Sex</th>
+                                <th>Age</th>
+                                <th>Static Code</th>
+                                <th>type</th>
+                                <th>Action</th>
                             </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody id="account-table">
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $row['first_name'] . ' ' . $row['middle_name'] . ' ' . $row['last_name']; ?>
+                                    </td>
+                                    <td><?php echo $row['sex_name']; ?></td>
+                                    <td><?php echo $row['age']; ?></td>
+                                    <td><?php echo $row['static_code']; ?></td>
+                                    <td><?php echo $row['type']; ?></td>
+                                    <td>
+                                        <div class="d-flex gap-2 align-items-center justify-content-center">
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#editModal" data-id="<?php echo $row['id']; ?>"
+                                                data-type="<?php echo $row['type'] ?>"
+                                                data-firstname="<?php echo $row['first_name'] ?>"
+                                                data-middlename="<?php echo $row['middle_name'] ?>"
+                                                data-lastname="<?php echo $row['last_name'] ?>"
+                                                data-email="<?php echo $row['email'] ?>"
+                                                data-sex="<?php echo $row['sex_id'] ?>"
+                                                data-age="<?php echo $row['age'] ?>">
+                                                EDIT
+                                            </button>
+                                            <form action="process/delete-official-logic.php" method="POST" class="d-inline">
+                                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                                <button type="submit" class="btn btn-sm btn-danger">DELETE</button>
+                                            </form>
+                                            <!-- to be finish by tomorrow kasi antok na ko :)) -->
+                                            <form action="" method="POST"> 
+                                                <input type="hidden" name="static_code" value="<?php echo $row['static_code']; ?>">
+                                                <button type="submit" class="btn btn-sm btn-secondary">GET QR</button>
+                                            </form>
+                                            <!-- end -->
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
                 </div>
 
                 <!-- Pagination -->

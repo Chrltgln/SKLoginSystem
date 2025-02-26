@@ -108,7 +108,7 @@ Instascan.Camera.getCameras().then(function (cameras) {
 });
 
 scannerForTimeIn.addListener('scan', function (content) {
-    let codeInput = document.getElementById("code");
+    let codeInput = document.getElementById("codeForTimeIn");
     codeInput.value = content;
 
     setTimeout(() => {
