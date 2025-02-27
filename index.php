@@ -1,61 +1,66 @@
 <?php include 'includes/header.php'; ?>
-<?php session_start(); 
-?>
+<?php session_start(); ?>
 
-<body class="bg-dark d-flex justify-content-center" style="height: 100vh;">
-    <div class="container text-center">
-        <div class="position-absolute top-0 end-0 p-3">
+<body class="bg-dark d-flex justify-content-center" style="min-height: 100vh;">
+    <div class="container-fluid text-center">
+        <!-- User Icon -->
+        <div class="position-absolute top-0 end-0 p-4">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
                 <i class="fa fa-user"></i>
             </button>
         </div>
-        <div class="position-absolute top-0 start-50 translate-middle-x mt-5">
-            <div class="row mb-5">
-                <div class="col-md-4">
-                    <div class="mb-2">'
-                        <img src="assets/images/GENTRI-LOGO.webp" alt="GENTRI LOGO" style="max-width: 150px;">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <img src="assets/images/SK-logo.png" alt="SK LOGO" style="max-width: 200px;">
-                </div>
-                <div class="col-md-4">
-                    <img src="assets/images/SK-logo.png" alt="SK LOGO" style="max-width: 150px;">
-                </div>
+
+        <!-- Logos Section -->
+        <div class="row justify-content-center ">
+            <!-- <div class="col-6 col-sm-4 col-md-2 mb-3">
+                <img src="assets/images/GENTRI-LOGO.webp" alt="GENTRI LOGO" class="img-fluid" style="max-width: 80%; max-height: 80%;">>
             </div>
-
-
-
-
-            <h1 style="font-size: 2.8rem;" class="card-title text-light">SANGGUNIANG KABATAAN - PINAGTIPUNAN</h1>
+            <div class="col-6 col-sm-4 col-md-2 mb-3">
+                <img src="assets/images/PINAGTIPUNAN-logo.png" alt="PINAGTIPUNAN LOGO" class="img-fluid" style="max-width: 80%; max-height: 80%;"> >
+            </div> -->
+            <!-- <div class="col-6 col-sm-4 col-md-2 mb-3">
+                <img src="assets/images/CHAIRPERSON-logo.png" alt="LOGO 4" class="img-fluid" style="max-width: 80%; max-height: 80%;">>
+            </div> -->
+            <div class="col-12 col-sm-4 col-md-2 mb-3">
+                <img src="assets/images/SK-logo.png" alt="SK LOGO" class="img-fluid" style="height:240px; width:300px; max-width: 100%; max-height: 100%;">>
+            </div>
+            <!-- <div class="col-6 col-sm-4 col-md-2 mb-3">
+                <img src="assets/images/jtp-logo.webp" alt="LOGO 5" class="img-fluid" style="max-width: 80%; max-height: 80%;">>
+            </div> -->
         </div>
 
+        <!-- Title Section -->
+        <div class="mt-4">
+            <h1 class="card-title text-light display-5" style="font-size: 4rem;">SANGGUNIANG KABATAAN - PINAGTIPUNAN</h1>
+        </div>
 
-        <div id="date-time-container" class="text-light">
+        <!-- Date and Time -->
+        <div id="date-time-container" class="text-light mt-4">
             <h2 id="date" class="date"></h2>
             <h2 id="clock" class="clock"></h2>
         </div>
 
-
+        <!-- Alerts -->
         <?php if (isset($_SESSION['message'])): ?>
             <div class="alert alert-<?php echo $_SESSION['message_type']; ?> alert-dismissible fade show mt-3" role="alert">
-                <?php echo $_SESSION['message'];
-                unset($_SESSION['message']);
-                unset($_SESSION['message_type']); ?>
+                <?php echo $_SESSION['message']; ?>
+                <?php unset($_SESSION['message'], $_SESSION['message_type']); ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php endif; ?>
-        <div class="row mt-7">
-            <div class="col-md-6 offset-md-3">
-                <div class="row">
-                    <div class="col-md-6">
+
+        <!-- Time In/Out Buttons -->
+        <div class="row mt-5">
+            <div class="col-12 col-md-6 mx-auto">
+                <div class="row g-3">
+                    <div class="col-6">
                         <div class="card text-center" data-bs-toggle="modal" data-bs-target="#timeInModal">
                             <div class="card-body">
                                 <h5 class="card-title">TIME IN</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <div class="card text-center" data-bs-toggle="modal" data-bs-target="#timeOutModal">
                             <div class="card-body">
                                 <h5 class="card-title">TIME OUT</h5>
@@ -70,7 +75,7 @@
     <!-- QR Code Modal -->
     <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" id="">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="qrModalLabel">
                         <?php echo $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . ' ' . $_SESSION['last_name']; ?>
@@ -78,17 +83,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="includes/generate-qr-code.php" alt="QR Code">
+                    <img src="includes/generate-qr-code.php" alt="QR Code" class="img-fluid">
                     <p class="mt-3">Please take a capture for your QR CODE <br> or use this code for time out.</p>
-                    <h4><?php echo $_SESSION['randomCode'] ?></h4>
+                    <h4><?php echo $_SESSION['randomCode']; ?></h4>
                 </div>
                 <div class="modal-footer">
-
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <form action="process/print-receipt.php" method="GET">
-                                    <input type="hidden" name="visitor_code" id="visitor_code" value="<?php echo $_SESSION['randomCode']; ?>">
-                                    <button type="submit" class="btn btn-primary">Print</button>
-                </form>
+                        <input type="hidden" name="visitor_code" id="visitor_code"
+                            value="<?php echo $_SESSION['randomCode']; ?>">
+                        <button type="submit" class="btn btn-primary">Print</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -123,13 +128,14 @@
                             <div class="d-flex justify-content-center">
                                 <video id="previewTimeIn" style="width: 100%; max-width: 600px;"></video>
                             </div>
-                            <form action="process/time-in-out.php" method="POST">
+                            <form action="process/time-in-officials.php" method="POST">
                                 <div class="mb-3">
                                     <label for="codeForTimeIn" class="form-label">Code</label>
                                     <input type="text" class="form-control" id="codeForTimeIn" name="codeForTimeIn"
                                         placeholder="Enter your code">
                                 </div>
-                                <button type="submit" class="btn btn-danger" name="timeIn" id="btnTimeIn">TIME
+                                <button type="submit" class="btn btn-danger" name="timeInForOfficials"
+                                    id="btnTimeIn">TIME
                                     IN</button>
                             </form>
                         </div>

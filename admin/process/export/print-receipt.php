@@ -13,7 +13,7 @@
         /* Styles for printing */
         @media print {
             @page {
-                size: 3.5in 6in;
+                size: 2.17in 3.8in;
                 margin: 0;
             }
 
@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="card-footer text-muted p-0">
-            <p>City Youth Development Office &copy; <?php echo date('Y'); ?></p>
+            <p>Sangguniang Kabataan - Pinagtipunan &copy; <?php echo date('Y'); ?></p>
             </div>
         </div>
     </div>

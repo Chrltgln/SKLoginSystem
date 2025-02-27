@@ -2,7 +2,7 @@
 include '../includes/database.php';
 
 $search = isset($_GET['search']) ? $_GET['search'] : '';
-$limit = 8; 
+$limit = 7; 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; 
 $offset = ($page - 1) * $limit; 
 
@@ -23,7 +23,7 @@ $result = $stmt->get_result();
 $totalRows = $result->fetch_assoc()['total'];
 $totalPages = ceil($totalRows / $limit);
 
-// Prepare SQL for fetching records
+
 $visitorsQuery = "
     SELECT DISTINCT
         visitors.first_name,

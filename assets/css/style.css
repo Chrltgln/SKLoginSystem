@@ -1,11 +1,27 @@
 
 body {
-    background-color: #343a40;
+    background-image: url('../images/bg.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
+    position: relative;
+}
+
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); 
+    z-index: -1; 
 }
 
 .card-title {
@@ -15,7 +31,7 @@ body {
 }
 
 .card {
-    background-color: #495057;
+    background-color: #4b4b4ba3;
     border: none;
     border-radius: 12px;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -117,4 +133,11 @@ select.form-select {
     max-width: 600px; 
     height: auto; 
     border-radius: 5px;
+}
+.logo-spacing-index{
+    margin-right: 20px;
+}
+.logo-spacing-index-cmd{
+    margin-right: 45px;
+    margin-bottom: 20px;
 }

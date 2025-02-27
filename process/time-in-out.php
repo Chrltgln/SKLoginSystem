@@ -25,7 +25,7 @@ function generateRandomCode($length = 6)
 }
 
 if (isset($_POST['timeIn'])) {
-    // Validation
+    //Validation
     if (!$firstName || !$middleName || !$lastName || !$purpose || !$age) {
         $_SESSION['message'] = "All required fields must be filled out.";
         $_SESSION['message_type'] = 'danger';
